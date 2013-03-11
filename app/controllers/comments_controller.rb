@@ -4,7 +4,7 @@
 # See MIT-LICENSE file or http://www.opensource.org/licenses/mit-license.php
 #------------------------------------------------------------------------------
 class CommentsController < ApplicationController
-  before_filter :require_user
+  before_filter :authenticate_user!
 
   # GET /comments
   # GET /comments.json

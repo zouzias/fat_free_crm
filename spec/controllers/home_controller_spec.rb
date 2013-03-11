@@ -7,11 +7,16 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe HomeController do
 
+  let(:user) do
+    FactoryGirl.create(:user)
+  end
+
   # GET /
   #----------------------------------------------------------------------------
   describe "responding to GET /" do
+
     before(:each) do
-      require_user
+      sign_in(:user, user)
     end
 
     it "should get a list of activities" do
@@ -77,7 +82,6 @@ describe HomeController do
     end
 
     it "should assign @hello and call hook" do
-      require_user
       controller.should_receive(:hook).at_least(:once)
 
       get :index
@@ -88,8 +92,10 @@ describe HomeController do
   # GET /home/options                                                      AJAX
   #----------------------------------------------------------------------------
   describe "responding to GET options" do
+
     before(:each) do
-      require_user
+      @current_user = user
+      sign_in(:user, @current_user)
     end
 
     it "should assign instance variables for user preferences" do
@@ -117,7 +123,7 @@ describe HomeController do
   #----------------------------------------------------------------------------
   describe "responding to POST redraw" do
     before(:each) do
-      require_user
+      sign_in(:user, user)
     end
 
     it "should save user selected options" do
@@ -125,6 +131,10 @@ describe HomeController do
       current_user.pref[:activity_asset].should == "tasks"
       current_user.pref[:activity_user].should == "Billy Bones"
       current_user.pref[:activity_duration].should == "two days"
+
+      @controller.current_user.pref[:activity_asset].should == "tasks"
+      @controller.current_user.pref[:activity_user].should == "Billy Bones"
+      @controller.current_user.pref[:activity_duration].should == "two days"
     end
 
     it "should get a list of activities" do

@@ -40,7 +40,17 @@
 #
 
 class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_protected :admin, :suspended_at
+
+  attr_accessor :login
+
 
   before_create  :check_if_needs_approval
   before_destroy :check_if_current_user, :check_if_has_related_assets
@@ -77,17 +87,6 @@ class User < ActiveRecord::Base
   scope :have_assigned_opportunities, joins("INNER JOIN opportunities ON users.id = opportunities.assigned_to").
                                       where("opportunities.stage <> 'lost' AND opportunities.stage <> 'won'").
                                       select('DISTINCT(users.id), users.*')
-
-  acts_as_authentic do |c|
-    c.session_class = Authentication
-    c.validates_uniqueness_of_login_field_options = { :message => :username_taken }
-    c.validates_length_of_login_field_options     = { :minimum => 1, :message => :missing_username }
-    c.merge_validates_format_of_login_field_options(:with => /[a-zA-Z0-9_-]+/)
-
-    c.validates_uniqueness_of_email_field_options = { :message => :email_in_use }
-    c.validates_length_of_password_field_options  = { :minimum => 0, :allow_blank => true, :if => :require_password? }
-    c.ignore_blank_passwords = true
-  end
 
   # Store current user in the class so we could access it from the activity
   # observer without extra authentication query.
@@ -133,17 +132,15 @@ class User < ActiveRecord::Base
     I18n.locale = self.preference[:locale] if self.preference[:locale]
   end
 
-  # Generate the value of single access token if it hasn't been set already.
-  #----------------------------------------------------------------------------
-  def set_single_access_token
-    self.single_access_token ||= update_attribute(:single_access_token, Authlogic::Random.friendly_token)
-  end
-
   # Massage value when using Chosen select box which gives values like ["", "1,2,3"]
   #----------------------------------------------------------------------------
   def group_ids=(value)
     value = value.join.split(',').map(&:to_i) if value.map{|v| v.to_s.include?(',')}.any?
     super(value)
+  end
+
+  def after_token_authentication
+    reset_authentication_token!
   end
 
   private
@@ -179,6 +176,17 @@ class User < ActiveRecord::Base
       Ability.new(User.current_user)
     end
 
+  end
+
+  # Single access token:  reset the authentication,
+  protected
+
+  def self.find_for_database_authentication(conditions)
+    login = conditions.delete(:login)
+    where(conditions)
+    .where(["username = :login OR email = :login",
+           {:login => login}])
+    .first
   end
 
   ActiveSupport.run_load_hooks(:fat_free_crm_user, self)
