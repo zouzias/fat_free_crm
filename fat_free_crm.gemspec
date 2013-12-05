@@ -24,7 +24,7 @@ Gem::Specification.new do |gem|
   # Manually added paperclip gem dependency "cocaine" in order to fix load error: "no such file to load -- cocaine"
   gem.add_dependency 'cocaine'
   gem.add_dependency 'paper_trail'
-  gem.add_dependency 'devise'
+  gem.add_dependency 'devise',              '~> 2'
   gem.add_dependency 'acts_as_commentable', '~> 3.0.1'
   gem.add_dependency 'acts-as-taggable-on', '~> 2.3.3'
   gem.add_dependency 'dynamic_form'
