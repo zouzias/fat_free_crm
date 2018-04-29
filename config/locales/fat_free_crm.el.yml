@@ -9,7 +9,7 @@ el:
   at: στο(/ην)
   here: Εδώ
   no_button: 'Όχι'
-  not_implemented: Not implemented yet.
+  not_implemented: Χωρίς υλοποίηση ακόμα.
   or: ή
   select_none: -- Κανένα --
   select_blank: -- Διάλεξε --
@@ -49,9 +49,9 @@ el:
   rejected: Απορρίφθηκε
   cold_call: Cold Call
   conference: Συνέδριο
-  online: Online Marketing
+  online: Μάρκετινγκ
   referral: Referral
-  self: Self Generated
+  self: Αυτοδημιουργήθηκε
   web: Ιστοσελίδα
   word_of_mouth: Word of Mouth
   other: Λοιπά
@@ -60,11 +60,11 @@ el:
   presentation: Παρουσίαση
   proposal: Πρόταση
   negotiation: Negotiation
-  final_review: Final Review
+  final_review: Τελική κρίση
   won: Closed/Won
   lost: Closed/Lost
-  call: Call
-  email: Email
+  call: Κλήση
+  email: Ηλεκτρονικό ταχυδρομείο
   follow_up: Follow-up
   lunch: Μεσημεριανό
   meeting: Συνάντηση
@@ -264,35 +264,35 @@ el:
   already_signed_up: Already signed up?
   alt_email: Alternative email
   avatar: Avatar
-  change_password: Change Password
-  company: Company
+  change_password: Αλλάξτε Κωδικό
+  company: Εταιρεία
   contact_info: Contact Information
-  current_password: Current password
+  current_password: Τρέχων κωδικός
   edit_profile: Edit Profile
-  first_name: First name
+  first_name: Όνομα
   google: Google IM
   gravatar_help: Not familiar with Gravatars? Learn about Gravatars
   image_file: Image file
   image_help: The image file you upload will be automatically resized to 75 x 75 pixels.
     Supported formats are GIF, JPG, and PNG.
-  job_title: Title
-  last_name: Last name
+  job_title: Τίτλος
+  last_name: Επιθετό
   login_now_link: Login Now!
-  mobile: Mobile
+  mobile: Κινητό
   my_profile: My Profile
-  new_password: New password
-  password: Password
+  new_password: Νέος κωδικός
+  password: Κωδικός
   password_confirmation: Confirm new password
-  phone: Phone
-  profile: Profile
-  profile_language: Language
+  phone: Τηλέφωνο
+  profile: Προφίλ
+  profile_language: Γλώσσα
   save_profile: Save Profile
   sign_up: Sign Up
   sign_up_button: Sign Up
   skype: Skype
   upload_picture: Upload Picture
   use_gravatar: Use Gravatar
-  user: User
+  user: Χρήστης
   username: Username
   yahoo: Yahoo IM
   born_on: Born on
@@ -674,10 +674,10 @@ el:
 
   # Views -> Comments.
   #----------------------------------------------------------------------------
-  comment: Comment
+  comment: Σχόλιο
   edit_comment: Editing comment
   show: Show
-  update: Update
+  update: Ενημέρωση
   following_users_will_be_notified: The following users will be notified by email
   notifications_tooltip: Subscribers will receive new comments via email
   subscribe_via_email: Subscribe via email
@@ -702,7 +702,7 @@ el:
 
   # Views -> Admin -> Groups
   #----------------------------------------------------------------------------
-  create_group: Create Group
+  create_group: Δημιουργία Ομάδας
   save_group: Save Group
   group_members: members
   groups: Groups
@@ -876,17 +876,17 @@ el:
   views:
     admin:
       plugins:
-        author: Author
-        version: Version
-        description: Description
+        author: Συγγραφές
+        version: Έκδοση
+        description: Περιγραφή
 
   # Simple Form translations
   #----------------------------------------------------------------------------
   simple_form:
-    yes: 'Yes'
-    no: 'No'
+    yes: 'Ναι'
+    no: 'Οχι'
     required:
-      text: required
+      text: απαραίτητο
       mark: ! '*'
       # You can uncomment the line below if you need to overwrite the whole required html.
       # When using html, text and mark won't be used.
@@ -898,9 +898,9 @@ el:
   #----------------------------------------------------------------------------
   field_types:
     string:
-      title: Short Answer
+      title: Σύντομη απάντηση
     text:
-      title: Long Answer
+      title: Εκτενής Απάντηση
     select:
       title: Select List
     multiselect:
@@ -924,16 +924,16 @@ el:
     url:
       title: URL
     tel:
-      title: Phone Number
+      title: Αριθμός τηλεφώνου
     decimal:
-      title: Number (Decimal)
+      title: Αριθμός (Decimal)
     integer:
-      title: Number (Integer)
+      title: Αριθμός (Integer)
     float:
-      title: Number (Floating Point)
+      title: Αριθμός (Floating Point)
   pair:
-    start: Start
-    end: End
-    from_to: From %{from} to %{to}
-    from_only: From %{from}
-    to_only: Until %{to}
+    start: Αρχή
+    end: Τέλος
+    from_to: Από %{from} εώς %{to}
+    from_only: Από %{from}
+    to_only: Εώς %{to}
